@@ -70,14 +70,12 @@
                     <button class="filter-btn" data-filter="POSITIVE">Positif</button>
                     <button class="filter-btn" data-filter="NEGATIVE">Négatif</button>
                 </div>
-                <button id="btn-export" class="secondary-btn">📥 Exporter (CSV)</button>
-                <button id="btn-reset" class="secondary-btn"
-                    style="background: #ef4444; color: white; margin-top: 8px;">🔄 Réinitialiser</button>
+                <button id="btn-export" class="secondary-btn">Exporter CSV</button>
             </div>
 
             <!-- TOP PAIN POINTS (V2) -->
             <div class="panel-card" id="pain-points-card">
-                <h3>😡 Top Irritants (30j)</h3>
+                <h3>Top Irritants (30j)</h3>
                 <div id="pain-points-list">
                     <small>Chargement...</small>
                 </div>
@@ -85,7 +83,7 @@
 
             <!-- TRENDS HISTORY (V2) -->
             <div class="panel-card trends">
-                <h3>📈 Tendance (7j)</h3>
+                <h3>Tendance (7j)</h3>
                 <div id="trends-chart" class="chart-container">
                     <!-- CSS Bars will be injected here -->
                 </div>
@@ -97,7 +95,7 @@
 
             <!-- CONNECTED SOURCES (Phase 8 Refined) -->
             <div class="panel-card" id="sources-card">
-                <h3>🔗 Sources Connectées <span class="badge-mock">Mock Mode</span></h3>
+                <h3>Sources Connectées <span class="badge-mock">Mock Mode</span></h3>
                 <div class="source-item">
                     <svg class="source-icon ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round">
@@ -122,6 +120,15 @@
                 </div>
                 <button id="btn-sync-meta" class="secondary-btn" style="margin-top: 12px; font-size: 0.8rem;">Sync
                     Now</button>
+            </div>
+
+            <!-- GESTION DONNÉES -->
+            <div class="panel-card" style="border: 1px solid #fee2e2; background: #fef2f2;">
+                <h3 style="color: #991b1b;">Gestion des Données</h3>
+                <p style="font-size: 0.85rem; color: #6b7280; margin-bottom: 12px;">Réinitialiser la base de données
+                    complète</p>
+                <button id="btn-reset" class="secondary-btn"
+                    style="background: #dc2626; color: white; width: 100%;">Réinitialiser</button>
             </div>
 
             <!-- Nouvelle Analyse -->
