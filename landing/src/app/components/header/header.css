@@ -51,8 +51,8 @@ header {
 .dashboard-link-minimal {
     font-size: 0.85rem;
     font-weight: 600;
-    color: white;
-    background: var(--pos-color);
+    color: white !important;
+    background: #10b981 !important;
     padding: 8px 18px;
     border-radius: 8px;
     transition: var(--transition-smooth);
@@ -60,7 +60,7 @@ header {
 }
 
 .dashboard-link-minimal:hover {
-    background: #059669;
+    background: #059669 !important;
     box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
     transform: translateY(-1px);
 }
