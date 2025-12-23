@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/index.js"
+    },
+    {
+      "source": "/app",
+      "destination": "/dashboard/index.html"
+    },
+    {
+      "source": "/app/(.*)",
+      "destination": "/dashboard/$1",
+      "continue": true
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/landing/dist/landing/browser/$1"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/landing/dist/landing/browser/index.html"
+    }
+  ]
+}

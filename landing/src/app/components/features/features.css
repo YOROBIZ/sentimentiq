@@ -1,0 +1,119 @@
+.features {
+    padding: 100px 0;
+    background: #ffffff;
+}
+
+.section-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--pos-color);
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 64px;
+    color: #0f172a;
+    letter-spacing: -1px;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.feature-card {
+    padding: 60px 40px;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    border-radius: 32px;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.feature-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 40px 60px -15px rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.card-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 32px;
+}
+
+.card-icon svg {
+    width: 32px;
+    height: 32px;
+}
+
+.card-icon.pos {
+    background: #ecfdf5;
+    color: #10b981;
+}
+
+.card-icon.multi-source {
+    background: #f0f4ff;
+    gap: 8px;
+    position: relative;
+    padding: 0 10px;
+}
+
+.source-mini {
+    width: 24px !important;
+    height: 24px !important;
+    transition: transform 0.3s ease;
+}
+
+.source-mini.fb {
+    color: #1877F2;
+}
+
+.source-mini.ig {
+    color: #E4405F;
+}
+
+.feature-card:hover .source-mini.fb {
+    transform: scale(1.1) translateX(-2px);
+}
+
+.feature-card:hover .source-mini.ig {
+    transform: scale(1.1) translateX(2px);
+}
+
+.card-icon.neu {
+    background: #f8fafc;
+    color: #64748b;
+}
+
+.card-icon.neg {
+    background: #fef2f2;
+    color: #ef4444;
+}
+
+h3 {
+    font-size: 1.25rem;
+    margin-bottom: 16px;
+    color: #0f172a;
+}
+
+p {
+    font-size: 0.95rem;
+    color: #64748b;
+    line-height: 1.6;
+}
+
+@media (max-width: 968px) {
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+}

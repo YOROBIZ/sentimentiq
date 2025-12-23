@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SentimentIQ | AI Customer Insights</title>
+    <base href="/app/">
+    <!-- Favicon (SVG) -->
+    <link rel="icon"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='white' stroke='%23e5e7eb' stroke-width='4'/%3E%3Crect x='28' y='40' width='8' height='20' rx='4' fill='%2310b981'/%3E%3Crect x='46' y='30' width='8' height='40' rx='4' fill='%2364748b'/%3E%3Crect x='64' y='48' width='8' height='12' rx='4' fill='%23ef4444'/%3E%3C/svg%3E"
+        type="image/svg+xml">
+
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Outfit:wght@300;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div id="aurora-bg"></div>
+
+    <header>
+        <div class="logo-container" style="display: flex; align-items: center; gap: 12px;">
+            <svg width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"
+                aria-label="SentimentIQ Logo">
+                <!-- Outer circle -->
+                <circle cx="50" cy="50" r="46" fill="white" stroke="#e5e7eb" stroke-width="4" />
+                <!-- Positive -->
+                <rect x="28" y="40" width="8" height="20" rx="4" fill="#10b981" />
+                <!-- Neutral -->
+                <rect x="46" y="30" width="8" height="40" rx="4" fill="#64748b" />
+                <!-- Negative -->
+                <rect x="64" y="48" width="8" height="12" rx="4" fill="#ef4444" />
+            </svg>
+            <div class="logo-text">
+                <div
+                    style="font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 1.5rem; letter-spacing: -0.5px; color: #1e293b;">
+                    Sentiment<span style="color: #10b981;">IQ</span>
+                </div>
+            </div>
+        </div>
+        <div class="tagline">AI-Powered Customer Insights</div>
+    </header>
+
+    <main>
+        <!-- Le conteneur des bulles d'insights -->
+        <div id="insight-container">
+            <div id="bubbles-layer">
+                <div id="empty-state">
+                    <h2>En attente de données...</h2>
+                    <p>Analysez un premier avis pour voir la magie opérer.</p>
+                </div>
+            </div>
+
+            <!-- Zoom Controls (Outside bubbles-layer) -->
+
+            <!-- Zoom Controls -->
+            <div id="zoom-controls">
+                <button id="btn-zoom-in">+</button>
+                <button id="btn-zoom-out">-</button>
+            </div>
+        </div>
+
+        <!-- Sidebar pour ajouter des avis -->
+        <aside id="control-panel">
+            <div class="panel-card actions">
+                <h3>Outils Manager</h3>
+                <div class="filters">
+                    <button class="filter-btn active" data-filter="">Tout</button>
+                    <button class="filter-btn" data-filter="POSITIVE">Positif</button>
+                    <button class="filter-btn" data-filter="NEGATIVE">Négatif</button>
+                </div>
+                <button id="btn-export" class="secondary-btn">📥 Exporter (CSV)</button>
+            </div>
+
+            <!-- TOP PAIN POINTS (V2) -->
+            <div class="panel-card" id="pain-points-card">
+                <h3>😡 Top Irritants (30j)</h3>
+                <div id="pain-points-list">
+                    <small>Chargement...</small>
+                </div>
+            </div>
+
+            <!-- TRENDS HISTORY (V2) -->
+            <div class="panel-card trends">
+                <h3>📈 Tendance (7j)</h3>
+                <div id="trends-chart" class="chart-container">
+                    <!-- CSS Bars will be injected here -->
+                </div>
+                <div id="trends-stats"
+                    style="font-size: 0.8rem; color: #64748b; margin-top: 6px; display: flex; justify-content: space-between;">
+                    <span>Calcul en cours...</span>
+                </div>
+            </div>
+
+            <!-- CONNECTED SOURCES (Phase 8 Refined) -->
+            <div class="panel-card" id="sources-card">
+                <h3>🔗 Sources Connectées <span class="badge-mock">Mock Mode</span></h3>
+                <div class="source-item">
+                    <svg class="source-icon ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                    <div class="source-info">
+                        <strong>Instagram</strong>
+                        <small id="ig-status">Mocking: Inactive</small>
+                    </div>
+                </div>
+                <div class="source-item">
+                    <svg class="source-icon fb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                    </svg>
+                    <div class="source-info">
+                        <strong>Facebook</strong>
+                        <small id="fb-status">Mocking: Inactive</small>
+                    </div>
+                </div>
+                <button id="btn-sync-meta" class="secondary-btn" style="margin-top: 12px; font-size: 0.8rem;">Sync
+                    Now</button>
+            </div>
+
+            <!-- Nouvelle Analyse -->
+            <div class="panel-card">
+                <h3>Nouvelle Analyse</h3>
+                <input type="text" id="cust-name" placeholder="Nom du Client">
+                <textarea id="cust-feedback"
+                    placeholder="Que dit le client ? (ex: Le service en chambre était excellent, mais la clim était un peu lente...)"></textarea>
+                <button id="btn-analyze">Lancer l'Analyse IA</button>
+            </div>
+
+            <div class="panel-card metrics">
+                <h3>Indice de Satisfaction</h3>
+                <div class="gauge-container">
+                    <div id="satisfaction-gauge">0%</div>
+                </div>
+            </div>
+
+            <div class="signature">
+                <p>Designed & Developed by <br><span>Yoro Ndiaye</span></p>
+                <small>Certified Software Engineer</small>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Floating Tooltip -->
+    <div id="insight-tooltip" class="hidden">
+        <span class="close-tooltip">&times;</span>
+        <div id="tooltip-content"></div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
