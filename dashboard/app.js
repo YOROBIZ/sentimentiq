@@ -526,6 +526,38 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    const btnReset = document.getElementById('btn-reset');
+    if (btnReset) {
+        btnReset.addEventListener('click', async () => {
+            if (!confirm('⚠️ Êtes-vous sûr de vouloir supprimer TOUS les feedbacks ? Cette action est irréversible.')) {
+                return;
+            }
+
+            btnReset.disabled = true;
+            btnReset.innerText = '🔄 Suppression...';
+
+            try {
+                const response = await fetch('/api/reset', { method: 'DELETE' });
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert('✅ ' + data.message);
+                    fetchInsights();
+                    fetchPainPoints();
+                    fetchTrendsHistory();
+                } else {
+                    alert('❌ Erreur: ' + data.error);
+                }
+            } catch (error) {
+                console.error(error);
+                alert('❌ Erreur lors de la réinitialisation');
+            } finally {
+                btnReset.disabled = false;
+                btnReset.innerText = '🔄 Réinitialiser';
+            }
+        });
+    }
+
     if (filterBtns) {
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {

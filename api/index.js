@@ -170,6 +170,17 @@ app.get('/api/sources/meta/status', (req, res) => {
     });
 });
 
+// RESET ALL FEEDBACKS
+app.delete('/api/reset', (req, res) => {
+    db.run('DELETE FROM feedbacks', (err) => {
+        if (err) return res.status(500).json({ error: err.message });
+        db.run('DELETE FROM sqlite_sequence WHERE name="feedbacks"', (err2) => {
+            if (err2) console.error('Reset sequence error:', err2);
+            res.json({ status: 'OK', message: 'Tous les feedbacks ont été supprimés.' });
+        });
+    });
+});
+
 app.get('/api/auth/meta', (req, res) => {
     res.json({ auth_url: "https://www.facebook.com/v18.0/dialog/oauth?client_id=STUB&redirect_uri=STUB", state: "INITIATED" });
 });
