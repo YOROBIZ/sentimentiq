@@ -11,8 +11,7 @@
     },
     {
       "source": "/app/(.*)",
-      "destination": "/dashboard/$1",
-      "continue": true
+      "destination": "/dashboard/$1"
     },
     {
       "source": "/(.*)",

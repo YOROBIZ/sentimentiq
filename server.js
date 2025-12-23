@@ -15,12 +15,12 @@ app.use(express.json());
 // --- ROUTES ORDER MATTERS ---
 
 // 1. Dashboard (Vanilla JS) served on /app
-const publicPath = path.join(__dirname, 'public');
-app.use('/app', express.static(publicPath));
+const dashboardPath = path.join(__dirname, 'dashboard');
+app.use('/app', express.static(dashboardPath));
 
 // Handle /app/* explicitly to serve the main dashboard file
 app.get('/app/*', (req, res) => {
-    res.sendFile(path.join(publicPath, 'index.html'));
+    res.sendFile(path.join(dashboardPath, 'index.html'));
 });
 
 // 2. Landing Page (Angular Build) served on /
