@@ -1,0 +1,25 @@
+{
+    "name": "insight-ai-pro",
+    "version": "1.0.0",
+    "description": "Smart Customer Insight Analyzer - AI-powered feedback analysis dashboard",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js",
+        "dev": "node --watch server.js",
+        "build": "cd landing && npm install && npm run build"
+    },
+    "keywords": [
+        "ai",
+        "nlp",
+        "dashboard",
+        "javascript",
+        "sql"
+    ],
+    "author": "Yoro Ndiaye",
+    "license": "ISC",
+    "dependencies": {
+        "dotenv": "^16.6.1",
+        "express": "^4.22.1",
+        "sqlite3": "^5.1.7"
+    }
+}

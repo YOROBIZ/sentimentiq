@@ -1,0 +1,13 @@
+node_modules/
+.env
+.env.local
+*.sqlite
+*.db
+api/data/
+landing/dist/
+landing/node_modules/
+.DS_Store
+dist/
+build/
+.next/
+.vercel
