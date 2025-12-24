@@ -526,25 +526,32 @@ document.addEventListener('DOMContentLoaded', () => {
             bubblesLayer.style.transformOrigin = 'center center';
         }
 
-        // Redistribute bubbles to fill available space when zooming
+        // Completely redistribute bubbles to fill available space
         if (physicsBubbles.length > 0) {
             const effectiveWidth = container.clientWidth / currentZoom;
             const effectiveHeight = container.clientHeight / currentZoom;
 
+            // Grid-based redistribution for better space coverage
+            const cols = Math.ceil(Math.sqrt(physicsBubbles.length * (effectiveWidth / effectiveHeight)));
+            const rows = Math.ceil(physicsBubbles.length / cols);
+            const cellWidth = effectiveWidth / cols;
+            const cellHeight = effectiveHeight / rows;
+
             physicsBubbles.forEach((body, index) => {
-                const maxX = effectiveWidth - body.width;
-                const maxY = effectiveHeight - body.height;
+                const col = index % cols;
+                const row = Math.floor(index / cols);
 
-                // If bubble is outside new bounds, reposition it
-                if (body.x > maxX || body.y > maxY || body.x < 0 || body.y < 0) {
-                    body.x = Math.random() * Math.max(0, maxX);
-                    body.y = Math.random() * Math.max(0, maxY);
-                }
+                // Place bubble in grid cell with random offset
+                const targetX = col * cellWidth + (Math.random() * cellWidth * 0.6) + (cellWidth * 0.2);
+                const targetY = row * cellHeight + (Math.random() * cellHeight * 0.6) + (cellHeight * 0.2);
 
-                // Add velocity to redistribute bubbles
-                const impulseStrength = currentZoom < 1 ? 5 : 3;
-                body.vx = (Math.random() - 0.5) * impulseStrength;
-                body.vy = (Math.random() - 0.5) * impulseStrength;
+                // Ensure within bounds
+                body.x = Math.min(Math.max(0, targetX), effectiveWidth - body.width);
+                body.y = Math.min(Math.max(0, targetY), effectiveHeight - body.height);
+
+                // Add gentle velocity for animation
+                body.vx = (Math.random() - 0.5) * 4;
+                body.vy = (Math.random() - 0.5) * 4;
             });
         }
     }
