@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Ensure container has proper dimensions
         const containerWidth = Math.max(container.clientWidth, window.innerWidth * 0.9);
         const containerHeight = Math.max(container.clientHeight, isMobile ? 500 : 600);
-        
+
         const maxX = Math.max(0, containerWidth - rawSize);
         const maxY = Math.max(0, containerHeight - rawSize);
         const x = Math.random() * maxX;
@@ -524,6 +524,28 @@ document.addEventListener('DOMContentLoaded', () => {
         if (bubblesLayer) {
             bubblesLayer.style.transform = `scale(${currentZoom})`;
             bubblesLayer.style.transformOrigin = 'center center';
+        }
+
+        // Redistribute bubbles to fill available space when zooming
+        if (physicsBubbles.length > 0) {
+            const effectiveWidth = container.clientWidth / currentZoom;
+            const effectiveHeight = container.clientHeight / currentZoom;
+
+            physicsBubbles.forEach((body, index) => {
+                const maxX = effectiveWidth - body.width;
+                const maxY = effectiveHeight - body.height;
+
+                // If bubble is outside new bounds, reposition it
+                if (body.x > maxX || body.y > maxY || body.x < 0 || body.y < 0) {
+                    body.x = Math.random() * Math.max(0, maxX);
+                    body.y = Math.random() * Math.max(0, maxY);
+                }
+
+                // Add velocity to redistribute bubbles
+                const impulseStrength = currentZoom < 1 ? 5 : 3;
+                body.vx = (Math.random() - 0.5) * impulseStrength;
+                body.vy = (Math.random() - 0.5) * impulseStrength;
+            });
         }
     }
 

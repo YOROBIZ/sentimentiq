@@ -554,6 +554,8 @@ textarea:focus {
     left: 24px;
     display: flex;
     gap: 8px;
+    z-index: 200;
+    pointer-events: none;
 }
 
 #zoom-controls button {
@@ -564,6 +566,13 @@ textarea:focus {
     background: white;
     cursor: pointer;
     box-shadow: var(--shadow-soft);
+    pointer-events: auto;
+    transition: all 0.2s;
+}
+
+#zoom-controls button:hover {
+    background: var(--bg-color);
+    transform: scale(1.1);
 }
 
 /* --- MOBILE RESPONSIVE --- */
