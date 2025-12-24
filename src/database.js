@@ -62,7 +62,7 @@ db.serialize(() => {
         oauth_state TEXT DEFAULT 'INITIATED', -- INITIATED, CALLBACK_RECEIVED, CONNECTED, EXPIRED, ERROR
         last_sync_at DATETIME,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-    )});
+    )`);
 
     console.log('Tables "feedbacks", "raw_feedbacks" et "connected_sources" prêtes.');
 
@@ -86,10 +86,10 @@ db.serialize(() => {
             });
 
             stmt.finalize(() => {
-                console.log(`✅ Demo data seeded successfully! ${ demoFeedbacks.length } feedbacks added.`);
+                console.log(`✅ Demo data seeded successfully! ${demoFeedbacks.length} feedbacks added.`);
             });
         } else {
-            console.log(`📊 Database already contains ${ row.count } feedbacks.`);
+            console.log(`📊 Database already contains ${row.count} feedbacks.`);
         }
     });
 });
