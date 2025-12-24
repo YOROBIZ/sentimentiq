@@ -560,8 +560,10 @@ textarea:focus {
     }
 
     #insight-container {
-        height: 60vh;
+        min-height: 500px;
+        height: auto;
         width: 100%;
+        position: relative;
     }
 
     #control-panel {
