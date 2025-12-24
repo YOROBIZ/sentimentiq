@@ -54,13 +54,14 @@ header {
     color: white !important;
     background: #10b981 !important;
     padding: 8px 18px;
-    border-radius: 8px;
-    transition: var(--transition-smooth);
+    border-radius: 6px;
+    transition: all 0.3s ease;
     box-shadow: 0 2px 8px rgba(16, 185, 129, 0.15);
+    display: inline-block;
 }
 
 .dashboard-link-minimal:hover {
     background: #059669 !important;
     box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
-    transform: translateY(-1px);
+    transform: translateY(-2px);
 }

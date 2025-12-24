@@ -67,6 +67,30 @@ header {
     color: var(--text-muted);
 }
 
+/* --- FOOTER SIGNATURE --- */
+.signature {
+    text-align: center;
+    padding: 16px 0;
+    border-top: 1px solid var(--border-color);
+    margin-top: 20px;
+}
+
+.signature p {
+    font-size: 0.9rem;
+    color: var(--text-main);
+    margin-bottom: 4px;
+}
+
+.signature span {
+    font-weight: 600;
+    color: var(--pos-color);
+}
+
+.signature small {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
 /* --- MAIN LAYOUT --- */
 main {
     flex: 1;
