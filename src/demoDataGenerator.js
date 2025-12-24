@@ -46,43 +46,65 @@ const negativeTemplates = [
     { name: "Christine Lopez", content: "La clim ne fonctionnait pas et il faisait 30 degrés dans la chambre.", keys: "clim, fonctionne pas, chaleur" }
 ];
 
-// Generate 75-100 feedbacks: ~75% positive, ~15% neutral, ~10% negative
+// Generate exactly 40 feedbacks with realistic distribution for trend graph
 function generateDemoDataset() {
-    const total = 75 + Math.floor(Math.random() * 26); // 75-100
-    const positiveCount = Math.floor(total * 0.75);
-    const neutralCount = Math.floor(total * 0.15);
-    const negativeCount = total - positiveCount - neutralCount;
+    const total = 40; // Fixed at 40 feedbacks
+    const negativeCount = 10;  // 25% - Minimum 10 for realistic pain points
+    const positiveCount = 24;  // 60% - Still majority positive
+    const neutralCount = 6;    // 15% - Balanced neutral
 
     const dataset = [];
 
-    for (let i = 0; i < positiveCount; i++) {
-        const template = positiveTemplates[Math.floor(Math.random() * positiveTemplates.length)];
-        dataset.push({
-            ...template,
-            name: `${template.name.split(' ')[0]} ${String.fromCharCode(65 + Math.floor(Math.random() * 26))}.`,
-            sentiment: 'POSITIVE',
-            conf: 0.85 + Math.random() * 0.14
-        });
-    }
+    // Helper to generate date spread over last 7 days
+    const getRandomDate = (dayIndex) => {
+        const daysAgo = 7 - dayIndex; // Start from 7 days ago
+        const baseDate = Date.now() - (daysAgo * 24 * 60 * 60 * 1000);
+        // Add random hours within that day
+        const randomOffset = Math.random() * 24 * 60 * 60 * 1000;
+        return new Date(baseDate + randomOffset);
+    };
 
-    for (let i = 0; i < neutralCount; i++) {
-        const template = neutralTemplates[Math.floor(Math.random() * neutralTemplates.length)];
-        dataset.push({
-            ...template,
-            name: `${template.name.split(' ')[0]} ${String.fromCharCode(65 + Math.floor(Math.random() * 26))}.`,
-            sentiment: 'NEUTRAL',
-            conf: 0.45 + Math.random() * 0.25
-        });
-    }
+    // Distribute feedbacks across 7 days (roughly 5-6 per day)
+    const feedbacksPerDay = Math.ceil(total / 7);
+    let currentIndex = 0;
 
-    for (let i = 0; i < negativeCount; i++) {
-        const template = negativeTemplates[Math.floor(Math.random() * negativeTemplates.length)];
-        dataset.push({
-            ...template,
-            name: `${template.name.split(' ')[0]} ${String.fromCharCode(65 + Math.floor(Math.random() * 26))}.`,
-            sentiment: 'NEGATIVE',
-            conf: 0.85 + Math.random() * 0.14
-        });
+    for (let day = 0; day < 7; day++) {
+        const feedbacksToday = Math.min(feedbacksPerDay, total - currentIndex);
+
+        for (let i = 0; i < feedbacksToday; i++) {
+            let template, sentiment, conf;
+
+            // Determine sentiment based on remaining counts
+            const remainingPos = positiveCount - dataset.filter(f => f.sentiment === 'POSITIVE').length;
+            const remainingNeu = neutralCount - dataset.filter(f => f.sentiment === 'NEUTRAL').length;
+            const remainingNeg = negativeCount - dataset.filter(f => f.sentiment === 'NEGATIVE').length;
+
+            const rand = Math.random();
+
+            if (remainingNeg > 0 && (remainingPos === 0 || rand < 0.25)) {
+                template = negativeTemplates[Math.floor(Math.random() * negativeTemplates.length)];
+                sentiment = 'NEGATIVE';
+                conf = 0.85 + Math.random() * 0.14;
+            } else if (remainingNeu > 0 && (remainingPos === 0 || rand < 0.35)) {
+                template = neutralTemplates[Math.floor(Math.random() * neutralTemplates.length)];
+                sentiment = 'NEUTRAL';
+                conf = 0.45 + Math.random() * 0.25;
+            } else {
+                template = positiveTemplates[Math.floor(Math.random() * positiveTemplates.length)];
+                sentiment = 'POSITIVE';
+                conf = 0.85 + Math.random() * 0.14;
+            }
+
+            dataset.push({
+                ...template,
+                name: `${template.name.split(' ')[0]} ${String.fromCharCode(65 + Math.floor(Math.random() * 26))}.`,
+                sentiment,
+                conf,
+                date: getRandomDate(day)
+            });
+
+            currentIndex++;
+        }
     }
 
     return dataset;

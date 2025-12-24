@@ -81,7 +81,7 @@ db.serialize(() => {
             const stmt = db.prepare("INSERT INTO feedbacks (customer_name, content, sentiment, confidence, key_phrases, created_at) VALUES (?, ?, ?, ?, ?, ?)");
 
             demoFeedbacks.forEach(f => {
-                const date = new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString();
+                const date = f.date ? f.date.toISOString() : new Date(Date.now() - Math.random() * 30 * 24 * 60 * 60 * 1000).toISOString();
                 stmt.run(f.name, f.content, f.sentiment, f.conf, f.keys, date);
             });
 
