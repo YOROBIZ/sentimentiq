@@ -107,15 +107,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
         bubble.className = `bubble ${sentimentClass}`;
 
-        const rawSize = Math.min(160, Math.max(90, item.content.length * 0.8));
+        // Mobile-friendly size adjustment
+        const isMobile = window.innerWidth <= 768;
+        const baseSize = isMobile ? 80 : 120;
+        const rawSize = Math.min(isMobile ? 120 : 160, Math.max(baseSize, item.content.length * (isMobile ? 0.5 : 0.8)));
         const size = rawSize;
         const radius = size / 2;
 
         bubble.style.width = `${size}px`;
         bubble.style.height = `${size}px`;
 
-        const maxX = container.clientWidth - rawSize;
-        const maxY = container.clientHeight - rawSize;
+        // Ensure container has proper dimensions
+        const containerWidth = Math.max(container.clientWidth, window.innerWidth * 0.9);
+        const containerHeight = Math.max(container.clientHeight, isMobile ? 500 : 600);
+        
+        const maxX = Math.max(0, containerWidth - rawSize);
+        const maxY = Math.max(0, containerHeight - rawSize);
         const x = Math.random() * maxX;
         const y = Math.random() * maxY;
 
